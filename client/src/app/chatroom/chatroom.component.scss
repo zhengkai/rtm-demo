@@ -1,0 +1,48 @@
+.container {
+	height: 100%;
+}
+
+div.chatroom {
+	height: 100%;
+
+	input[name=uid] {
+		width: 200px;
+	}
+
+	> div.list {
+		position: relative;
+		height: calc(100% - 300px);
+		> div {
+			position: absolute;
+			bottom: 1rem;
+			font-family: 'Roboto Mono', monospace;
+			cursor: default;
+			overflow: hidden;
+			width: 100%;
+
+			> div {
+				border: 1px solid silver;
+				margin: 6px 0;
+				width: 100%;
+				padding: 4px 1rem;
+				border-radius: 0.5rem;
+				span {
+					font-weight: bold;
+				}
+			}
+		}
+	}
+
+	> div.send {
+
+		p {
+			margin: 4px 0;
+
+			&.template {
+				button {
+					margin-right: 0.5rem;
+				}
+			}
+		}
+	}
+}

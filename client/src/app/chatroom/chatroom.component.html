@@ -1,0 +1,37 @@
+<div class="container">
+	<div class="chatroom">
+		<div class="list">
+			<div>
+			<div *ngFor="let row of rs.history">
+				<span>{{ row.uid }} </span>
+				{{ row.isSend ? '»' : '«' }}
+				{{ row.msg }}
+			</div>
+			</div>
+		</div>
+		<div class="send">
+			<form #chatForm="ngForm" (ngSubmit)="submit()" (keydown)="keydown($event)">
+
+			<p>从 {{ rs.uid }} 发送给 UID（10002 是回音）</p>
+			<p>
+				<input (keydown)="keydown($event)" required type="number" name="uid" [(ngModel)]="toUID" class="form-control" min="1">
+			</p>
+
+			<p>消息</p>
+
+			<p class="template">
+				<button type="button" (click)="applyTemplate(i)" *ngFor="let t of template; let i = index" class="btn btn-primary">{{ i + 1 }}</button>
+			</p>
+
+			<p>
+				<textarea (keydown)="keydown($event)" required minlength="1" name="message" [(ngModel)]="message" class="form-control" name="content" rows="3"></textarea>
+			</p>
+
+			<p>
+				<button class="btn btn-primary" type="submit" [disabled]="!chatForm.form.valid || !toUID">Send Message ( Ctrl + Enter )</button>
+			</p>
+
+			</form>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,21 @@
+<div class="container">
+
+	<form #loginForm="ngForm" (ngSubmit)="submit()">
+
+		<p>
+		请输入一个 uid
+		</p>
+
+		<p>
+		<input type="number"
+			required class="form-control input-uid"
+			name="uid" [(ngModel)]="uid" min="1">
+		</p>
+
+		<p>
+		<button type="submit" class="btn btn-primary" [disabled]="!loginForm.form.valid">login</button>
+		</p>
+
+	</form>
+
+</div>
