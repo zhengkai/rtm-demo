@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -18,6 +19,7 @@ func server() {
 
 	mux := http.NewServeMux()
 	mux.HandleFunc(`/api/token`, getToken)
+	mux.HandleFunc(`/api/pid`, getPID)
 	fmt.Printf("port = %s\n", addr)
 	err := http.ListenAndServe(addr, mux)
 	if err != nil {
@@ -38,9 +40,16 @@ func getToken(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	log.Println(`get token`, i)
+
 	token, _ := rtm.ServerGettoken(int64(i))
 
 	b := []byte(token)
 
 	w.Write(b)
+}
+
+func getPID(w http.ResponseWriter, r *http.Request) {
+
+	w.Write([]byte(strconv.Itoa(configProjectID)))
 }

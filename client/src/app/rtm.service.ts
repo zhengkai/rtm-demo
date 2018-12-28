@@ -5,6 +5,7 @@ export interface Message {
 	isSend: boolean;
 	uid: number;
 	msg: string;
+	ts: number;
 }
 
 @Injectable({
@@ -12,6 +13,7 @@ export interface Message {
 })
 export class RtmService {
 
+	pid: number;
 	uid: number;
 
 	timeOut = 5000;
@@ -28,10 +30,15 @@ export class RtmService {
 
 	async getToken() {
 
+		const prt = await fetch('/api/pid');
+		const pab = await prt.arrayBuffer();
+		const pid = +String.fromCharCode.apply(null, new Uint8Array(pab.slice(0, 8)));
+		this.pid = pid;
+
+		console.log('pid = ', pid);
+
 		const rt = await fetch('/api/token?uid=' + this.uid);
-
 		const ab = await rt.arrayBuffer();
-
 		const token = String.fromCharCode.apply(null, new Uint8Array(ab.slice(0, 32)));
 
 		console.log('token =', token);
@@ -42,7 +49,7 @@ export class RtmService {
 			token,
 			autoReconnect: false,
 			connectionTimeout: 10 * 1000,
-			pid: 11000020,
+			pid,
 			ssl: true,
 			proxyEndpoint: 'rtm-nx-front.ifunplus.cn:13556',
 		});
@@ -99,6 +106,7 @@ export class RtmService {
 			isSend: false,
 			uid: +data.from,
 			msg: data.msg,
+			ts: Date.now(),
 		});
 
 		if (this.cb) {
@@ -125,6 +133,7 @@ export class RtmService {
 			isSend: true,
 			uid,
 			msg,
+			ts: Date.now(),
 		});
 	}
 

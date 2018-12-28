@@ -6,6 +6,8 @@
 				<span>{{ row.uid }} </span>
 				{{ row.isSend ? '»' : '«' }}
 				{{ row.msg }}
+
+				<p class="time">{{ row.ts | date : 'yyyy-MM-dd HH:mm:ss a' }}</p>
 			</div>
 			</div>
 		</div>
