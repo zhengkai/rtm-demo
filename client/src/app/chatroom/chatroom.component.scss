@@ -13,17 +13,19 @@ div.chatroom {
 		position: relative;
 		height: calc(100% - 300px);
 		> div {
+			overflow-x: hidden;
+			overflow-y: scroll;
+			height: 100%;
 			position: absolute;
 			bottom: 1rem;
 			font-family: 'Roboto Mono', monospace;
 			cursor: default;
-			overflow: hidden;
 			width: 100%;
 
 			> div {
 				border: 1px solid silver;
 				margin: 6px 0;
-				width: 100%;
+				width: calc(100% - 30px);
 				padding: 4px 1rem;
 				border-radius: 0.5rem;
 				span {

@@ -3,49 +3,61 @@ package main
 import (
 	"fmt"
 	"log"
-	"strconv"
 
 	"github.com/zhengkai/rtm"
 )
 
-// 接收遍历显示所有消息
+// 回音，原样复读所有来的消息发回去
 func echo(id int64) {
 
 	c := rtm.NewClient(id)
 	err := c.Connect()
 	if err != nil {
-		fmt.Println(`client connect err`, err)
+		fmt.Println(`echo connect err:`, err)
 		return
 	}
 
-	fmt.Println(`start read`)
+	log.Println(`echo start read`, id)
 	for {
 		ra, err := c.Read()
 		if err != nil {
-			fmt.Println(`read error:`, err)
+			fmt.Println(`echo read error:`, err)
 			break
 		}
 
-		for x, r := range ra {
+		for _, r := range ra {
 
 			if r.Method == `ping` || r.Method == `` {
 				continue
 			}
-			fmt.Println(`#`, x)
+			// log.Println(`#`, x)
 
 			if r.Method == `pushmsg` {
 				s, _ := rtm.GetPushmsg(r.Content)
 
-				go func() {
-					for i := 0; i < 200; i++ {
-						// time.Sleep(80 * time.Millisecond)
-						err := c.Sendmsg(s.From, `r`+strconv.Itoa(i)+` `+s.Msg)
-						if err != nil {
-							log.Println(`echo send msg error`, err)
-							break
+				err := c.Sendmsg(s.From, s.Msg)
+				if err != nil {
+					log.Println(`echo send msg error`, err)
+					break
+				}
+
+				/*
+					go func() {
+						for i := 0; i < 50; i++ {
+							err := c.Sendmsg(s.From, `r`+strconv.Itoa(i)+` `+s.Msg)
+							if err != nil {
+								log.Println(`echo send msg error`, err)
+								break
+							}
+
+							err = c.Sendmsg(clientBotID, `r`+strconv.Itoa(i)+` `+s.Msg)
+							if err != nil {
+								log.Println(`echo send msg error`, err)
+								break
+							}
 						}
-					}
-				}()
+					}()
+				*/
 
 			} else {
 				log.Println(string(r.Content))
@@ -53,7 +65,7 @@ func echo(id int64) {
 
 			if err != nil {
 
-				fmt.Println(`client err`, err)
+				fmt.Println(`echo client err`, err)
 				return
 			}
 		}

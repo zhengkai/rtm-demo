@@ -4,10 +4,14 @@ import (
 	"fmt"
 	"log"
 	"math/rand"
-	"strconv"
 	"time"
 
 	"github.com/zhengkai/rtm"
+)
+
+var (
+	clientBotID  = int64(10001)
+	clientEchoID = int64(10002)
 )
 
 func main() {
@@ -27,80 +31,22 @@ func main() {
 	go func() {
 		for {
 			log.Println(`echo connect`)
-			echo(10002)
+			echo(clientEchoID)
+			time.Sleep(time.Second)
 		}
 	}()
-	// go bot(10001)
+
+	go func() {
+		for {
+			log.Println(`bot connect`)
+			bot(clientBotID)
+			time.Sleep(time.Second)
+		}
+	}()
 
 	for i := int64(0); i < 10; i++ {
 		// go archer(20000 + i)
 	}
 
 	server()
-}
-
-// 负责发送消息
-func archer(id int64) {
-
-	target := int64(10001)
-
-	c := rtm.NewClient(id)
-	err := c.Connect()
-	if err != nil {
-		fmt.Println(`client connect err`, err)
-		return
-	}
-
-	i := 0
-
-	for {
-
-		i++
-
-		time.Sleep(time.Second)
-
-		c.Sendmsg(target, `test `+strconv.Itoa(i))
-	}
-}
-
-// 接收遍历显示所有消息
-func bot(id int64) {
-
-	c := rtm.NewClient(id)
-	err := c.Connect()
-	if err != nil {
-		fmt.Println(`client connect err`, err)
-		return
-	}
-
-	fmt.Println(`start read`)
-	for {
-		ra, err := c.Read()
-		if err != nil {
-			fmt.Println(`read error:`, err)
-			break
-		}
-
-		for x, r := range ra {
-
-			if r.Method == `ping` || r.Method == `` {
-				continue
-			}
-			fmt.Println(`#`, x)
-
-			if r.Method == `pushmsg` {
-				// s, _ := rtm.GetPushmsg(r.Content)
-				// log.Println(`pushmsg`, s.From, s.Msg)
-			} else {
-				log.Println(string(r.Content))
-			}
-
-			if err != nil {
-
-				fmt.Println(`client err`, err)
-				return
-			}
-		}
-		// fmt.Println(`loop`)
-	}
 }

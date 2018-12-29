@@ -1,5 +1,7 @@
 github.com/vmihailenco/msgpack v4.0.1+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/zhengkai/mpp v1.0.0 h1:s0+dIErNfVwMmN/OdGxMALEBqmoSqT7ZiecWgtD+E0w=
 github.com/zhengkai/mpp v1.0.0/go.mod h1:ZiCwG411L5Aa5o97t344khTbDM1ypiijHXTKNECh9d8=
+github.com/zhengkai/mpp v1.0.2 h1:SHO21bZ1yTTQ2pdWg5ZuBXtm6XezWwsXD1YZkA8DSbI=
+github.com/zhengkai/mpp v1.0.2/go.mod h1:eRgv81DXmlB6CWszlnSx1darcvyCXb9ldYzD6lzj75k=
 github.com/zhengkai/rtm v1.0.1 h1:xduaQK3KD8dHSyNl6VOfR0HqFIvBA+QkkZjTyZP9WV0=
 github.com/zhengkai/rtm v1.0.1/go.mod h1:akHshHY/MczgHJUfptLab1Moo5VCkkUDk8KiWpsBK4U=

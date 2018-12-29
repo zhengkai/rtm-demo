@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="chatroom">
 		<div class="list">
-			<div>
+			<div #msgList>
 			<div *ngFor="let row of rs.history">
 				<span>{{ row.uid }} </span>
 				{{ row.isSend ? '»' : '«' }}

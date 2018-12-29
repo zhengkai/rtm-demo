@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RtmService, Message } from '../rtm.service';
 
@@ -9,9 +9,12 @@ import { RtmService, Message } from '../rtm.service';
 })
 export class ChatroomComponent implements OnInit {
 
+	@ViewChildren('msgList') msgList: QueryList<ElementRef>;
+
 	template = [
 		'{"json":"template"}',
 		'{"add":1,"sub":2}',
+		'数据模板，可以任意定制',
 	];
 
 	toUID = 10002;
@@ -32,6 +35,8 @@ export class ChatroomComponent implements OnInit {
 			this.isSending = false;
 		});
 		this.message = '';
+
+		this.scroll();
 	}
 
 	applyTemplate(i) {
@@ -40,8 +45,12 @@ export class ChatroomComponent implements OnInit {
 	}
 
 	recv(data: any) {
-		console.log('recv', '' + data.from);
-		// console.log(this.rs.history);
+		this.scroll();
+	}
+
+	scroll() {
+		const o = this.msgList.first.nativeElement;
+		o.scrollTop = o.scrollHeight;
 	}
 
 	constructor(public rs: RtmService, private router: Router, private routerInfo: ActivatedRoute) {
