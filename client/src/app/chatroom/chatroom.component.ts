@@ -14,7 +14,7 @@ export class ChatroomComponent implements OnInit {
 	template = [
 		'{"json":"template"}',
 		'{"add":1,"sub":2}',
-		'数据模板，可以任意定制',
+		'数据模板，可以任意定制，代码在 client/src/app/chatroom/chatroom.component.ts 开头',
 	];
 
 	toUID = 10002;
