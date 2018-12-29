@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/zhengkai/rtm"
@@ -13,7 +12,7 @@ func bot(id int64) {
 	c := rtm.NewClient(id)
 	err := c.Connect()
 	if err != nil {
-		fmt.Println(`bot connect err:`, err)
+		log.Println(`bot connect err:`, err)
 		return
 	}
 
@@ -47,16 +46,16 @@ func bot(id int64) {
 
 			if err != nil {
 
-				fmt.Println(`echo client err`, err)
+				log.Println(`echo client err`, err)
 				return
 			}
 		}
 
 		if count > 0 {
 			total += count
-			fmt.Println(`recv msg:`, total, count)
+			log.Println(`recv msg:`, total, count)
 		}
 
-		// fmt.Println(`loop`)
+		// log.Println(`loop`)
 	}
 }

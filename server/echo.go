@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 
 	"github.com/zhengkai/rtm"
@@ -13,7 +12,7 @@ func echo(id int64) {
 	c := rtm.NewClient(id)
 	err := c.Connect()
 	if err != nil {
-		fmt.Println(`echo connect err:`, err)
+		log.Println(`echo connect err:`, err)
 		return
 	}
 
@@ -21,7 +20,7 @@ func echo(id int64) {
 	for {
 		ra, err := c.Read()
 		if err != nil {
-			fmt.Println(`echo read error:`, err)
+			log.Println(`echo read error:`, err)
 			break
 		}
 
@@ -65,7 +64,7 @@ func echo(id int64) {
 
 			if err != nil {
 
-				fmt.Println(`echo client err`, err)
+				log.Println(`echo client err`, err)
 				return
 			}
 		}
