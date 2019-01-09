@@ -1,5 +1,7 @@
 SHELL:=/bin/bash
 
 default:
-	./bin/build.sh
+	./bin/run-server.sh dev 21003
 
+# test:
+#	./bin/run-server.sh test 21004

@@ -3,7 +3,7 @@
 	"version": 1,
 	"newProjectRoot": "projects",
 	"projects": {
-		"funplus": {
+		"rtm": {
 			"root": "",
 			"sourceRoot": "src",
 			"projectType": "application",
@@ -17,7 +17,7 @@
 				"build": {
 					"builder": "@angular-devkit/build-angular:browser",
 					"options": {
-						"outputPath": "dist/funplus",
+						"outputPath": "dist/rtm",
 						"index": "src/index.html",
 						"main": "src/main.ts",
 						"polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
 				"serve": {
 					"builder": "@angular-devkit/build-angular:dev-server",
 					"options": {
-						"browserTarget": "funplus:build"
+						"browserTarget": "rtm:build"
 					},
 					"configurations": {
 						"production": {
-							"browserTarget": "funplus:build:production"
+							"browserTarget": "rtm:build:production"
 						}
 					}
 				},
 				"extract-i18n": {
 					"builder": "@angular-devkit/build-angular:extract-i18n",
 					"options": {
-						"browserTarget": "funplus:build"
+						"browserTarget": "rtm:build"
 					}
 				},
 				"test": {
@@ -107,7 +107,7 @@
 				}
 			}
 		},
-		"funplus-e2e": {
+		"rtm-e2e": {
 			"root": "e2e/",
 			"projectType": "application",
 			"prefix": "",
@@ -116,11 +116,11 @@
 					"builder": "@angular-devkit/build-angular:protractor",
 					"options": {
 						"protractorConfig": "e2e/protractor.conf.js",
-						"devServerTarget": "funplus:serve"
+						"devServerTarget": "rtm:serve"
 					},
 					"configurations": {
 						"production": {
-							"devServerTarget": "funplus:serve:production"
+							"devServerTarget": "rtm:serve:production"
 						}
 					}
 				},
@@ -136,5 +136,5 @@
 			}
 		}
 	},
-	"defaultProject": "funplus"
+	"defaultProject": "rtm"
 }
